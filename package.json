@@ -35,7 +35,7 @@
     "validation",
     "eu"
   ],
-  "author": "sten muchow",
+  "author": "sten muchow <powdertothepeeps@gmail.com> (https://www.powdertothepeople.tv)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/stenmuchow/eu-vat-validation/issues"
