@@ -6,7 +6,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "euVatValidation.js",
-    library: "",
-    libraryTarget: "umd"
+    library: "euVatValidation",
+    libraryTarget: "umd",
+    umdNamedDefine: true
   }
 };
