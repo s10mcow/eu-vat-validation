@@ -3,7 +3,7 @@
   "version": "1.0.5",
   "description": "A VAT number validation class",
   "main": "dist/main.js",
-  "module": "dist/main.js",
+  "module": "index.js",
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "babel-loader": "^8.0.2",

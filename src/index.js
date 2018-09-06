@@ -1,6 +1,6 @@
-import CountryVATCheckers from "./CountryVATCheckers";
+const CountryVATCheckers = require("./CountryVATCheckers");
 
-export default class VatValidator {
+class VatValidator {
   constructor(defaultVatCode = "DE") {
     this.defaultVatCode = defaultVatCode;
   }
@@ -85,3 +85,5 @@ export default class VatValidator {
       .reduce((memo, isValid) => isValid, false);
   }
 }
+
+module.exports = VatValidator;
