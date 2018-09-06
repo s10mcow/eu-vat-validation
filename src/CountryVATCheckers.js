@@ -1,4 +1,4 @@
-class CountryVATCheckers {
+export default class CountryVATCheckers {
   ATVATCheckDigit(vatnumber) {
     // Checks the check digits of an Austrian VAT number.
 
@@ -970,5 +970,3 @@ class CountryVATCheckers {
     else return false;
   }
 }
-
-module.exports = CountryVATCheckers;
