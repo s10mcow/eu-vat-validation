@@ -1,6 +1,6 @@
 {
   "name": "eu-vat-validation",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A VAT number validation class",
   "main": "dist/main.js",
   "devDependencies": {
