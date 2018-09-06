@@ -2,8 +2,8 @@
   "name": "eu-vat-validation",
   "version": "1.0.9",
   "description": "A VAT number validation class",
-  "main": "dist/main.js",
-  "module": "index.js",
+  "main": "dist/euVatValidation.js",
+  "module": "src/index.js",
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "babel-loader": "^8.0.2",
