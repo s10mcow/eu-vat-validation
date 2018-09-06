@@ -1,4 +1,39 @@
 {
   "name": "eu-vat-validation",
   "version": "1.0.0",
-} 
+  "description": "A VAT number validation class",
+  "main": "index.js",
+  "devDependencies": {
+    "babel-eslint": "^8.2.6",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "esprima": "^4.0.1",
+    "prettier": "1.14.2",
+    "prettier-eslint": "^8.8.2"
+  },
+  "dependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stenmuchow/eu-vat-validation.git"
+  },
+  "keywords": [
+    "vat",
+    "validation",
+    "eu"
+  ],
+  "author": "sten muchow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stenmuchow/eu-vat-validation/issues"
+  },
+  "homepage": "https://github.com/stenmuchow/eu-vat-validation#readme"
+}

@@ -1,81 +1,87 @@
-function checkVATNumber(toCheck) {
-  // To change the default country (e.g. from the UK to Germany - DE):
-  //    1.  Change the country code in the defCCode variable below to "DE".
-  //    2.  Remove the question mark from the regular expressions associated with the UK VAT number:
-  //        i.e. "(GB)?" -> "(GB)"
-  //    3.  Add a question mark into the regular expression associated with Germany's number
-  //        following the country code: i.e. "(DE)" -> "(DE)?"
+export default class VatValidator {
+  constructor(defaultVatCode = "DE") {
+    this.defaultVatCode = defaultVatCode;
+  }
 
-  const defCCode = 'DE';
+  validate(toCheck) {
+    // To change the default country (e.g. from the UK to Germany - DE):
+    //    1.  Change the country code in the defCCode variable below to "DE".
+    //    2.  Remove the question mark from the regular expressions associated with the UK VAT number:
+    //        i.e. "(GB)?" -> "(GB)"
+    //    3.  Add a question mark into the regular expression associated with Germany's number
+    //        following the country code: i.e. "(DE)" -> "(DE)?"
 
-  // Note - VAT codes without the "**" in the comment do not have check digit checking.
-  const vatexp = [
-    /^(AT)U(\d{8})$/, //** Austria
-    /^(BE)(0?\d{9})$/, //** Belgium
-    /^(BG)(\d{9,10})$/, //** Bulgaria
-    /^(CHE)(\d{9})(MWST|TVA|IVA)?$/, //** Switzerland
-    /^(CY)([0-59]\d{7}[A-Z])$/, //** Cyprus
-    /^(CZ)(\d{8,10})(\d{3})?$/, //** Czech Republic
-    /^(DE)([1-9]\d{8})$/, //** Germany
-    /^(DK)(\d{8})$/, //** Denmark
-    /^(EE)(10\d{7})$/, //** Estonia
-    /^(EL)(\d{9})$/, //** Greece
-    /^(ES)([A-Z]\d{8})$/, //** Spain (National juridical entities)
-    /^(ES)([A-HN-SW]\d{7}[A-J])$/, //** Spain (Other juridical entities)
-    /^(ES)([0-9YZ]\d{7}[A-Z])$/, //** Spain (Personal entities type 1)
-    /^(ES)([KLMX]\d{7}[A-Z])$/, //** Spain (Personal entities type 2)
-    /^(EU)(\d{9})$/, //** EU-type
-    /^(FI)(\d{8})$/, //** Finland
-    /^(FR)(\d{11})$/, //** France (1)
-    /^(FR)([A-HJ-NP-Z]\d{10})$/, // France (2)
-    /^(FR)(\d[A-HJ-NP-Z]\d{9})$/, // France (3)
-    /^(FR)([A-HJ-NP-Z]{2}\d{9})$/, // France (4)
-    /^(GB)?(\d{9})$/, //** UK (Standard)
-    /^(GB)?(\d{12})$/, //** UK (Branches)
-    /^(GB)?(GD\d{3})$/, //** UK (Government)
-    /^(GB)?(HA\d{3})$/, //** UK (Health authority)
-    /^(HR)(\d{11})$/, //** Croatia
-    /^(HU)(\d{8})$/, //** Hungary
-    /^(IE)(\d{7}[A-W])$/, //** Ireland (1)
-    /^(IE)([7-9][A-Z\*\+)]\d{5}[A-W])$/, //** Ireland (2)
-    /^(IE)(\d{7}[A-W][AH])$/, //** Ireland (3)
-    /^(IT)(\d{11})$/, //** Italy
-    /^(LV)(\d{11})$/, //** Latvia
-    /^(LT)(\d{9}|\d{12})$/, //** Lithunia
-    /^(LU)(\d{8})$/, //** Luxembourg
-    /^(MT)([1-9]\d{7})$/, //** Malta
-    /^(NL)(\d{9})B\d{2}$/, //** Netherlands
-    /^(NO)(\d{9})$/, //** Norway (not EU)
-    /^(PL)(\d{10})$/, //** Poland
-    /^(PT)(\d{9})$/, //** Portugal
-    /^(RO)([1-9]\d{1,9})$/, //** Romania
-    /^(RU)(\d{10}|\d{12})$/, //** Russia
-    /^(RS)(\d{9})$/, //** Serbia
-    /^(SI)([1-9]\d{7})$/, //** Slovenia
-    /^(SK)([1-9]\d[2346-9]\d{7})$/, //** Slovakia Republic
-    /^(SE)(\d{10}01)$/, //** Sweden
-  ];
-  // Load up the string to check
-  let VATNumber = toCheck.toUpperCase();
+    const defCCode = this.defaultVatCode;
 
-  // Remove spaces etc. from the VAT number to help validation
-  VATNumber = VATNumber.replace(/(\s|-|\.)+/g, '');
+    // Note - VAT codes without the "**" in the comment do not have check digit checking.
+    const vatexp = [
+      /^(AT)U(\d{8})$/, //** Austria
+      /^(BE)(0?\d{9})$/, //** Belgium
+      /^(BG)(\d{9,10})$/, //** Bulgaria
+      /^(CHE)(\d{9})(MWST|TVA|IVA)?$/, //** Switzerland
+      /^(CY)([0-59]\d{7}[A-Z])$/, //** Cyprus
+      /^(CZ)(\d{8,10})(\d{3})?$/, //** Czech Republic
+      /^(DE)([1-9]\d{8})$/, //** Germany
+      /^(DK)(\d{8})$/, //** Denmark
+      /^(EE)(10\d{7})$/, //** Estonia
+      /^(EL)(\d{9})$/, //** Greece
+      /^(ES)([A-Z]\d{8})$/, //** Spain (National juridical entities)
+      /^(ES)([A-HN-SW]\d{7}[A-J])$/, //** Spain (Other juridical entities)
+      /^(ES)([0-9YZ]\d{7}[A-Z])$/, //** Spain (Personal entities type 1)
+      /^(ES)([KLMX]\d{7}[A-Z])$/, //** Spain (Personal entities type 2)
+      /^(EU)(\d{9})$/, //** EU-type
+      /^(FI)(\d{8})$/, //** Finland
+      /^(FR)(\d{11})$/, //** France (1)
+      /^(FR)([A-HJ-NP-Z]\d{10})$/, // France (2)
+      /^(FR)(\d[A-HJ-NP-Z]\d{9})$/, // France (3)
+      /^(FR)([A-HJ-NP-Z]{2}\d{9})$/, // France (4)
+      /^(GB)?(\d{9})$/, //** UK (Standard)
+      /^(GB)?(\d{12})$/, //** UK (Branches)
+      /^(GB)?(GD\d{3})$/, //** UK (Government)
+      /^(GB)?(HA\d{3})$/, //** UK (Health authority)
+      /^(HR)(\d{11})$/, //** Croatia
+      /^(HU)(\d{8})$/, //** Hungary
+      /^(IE)(\d{7}[A-W])$/, //** Ireland (1)
+      /^(IE)([7-9][A-Z\*\+)]\d{5}[A-W])$/, //** Ireland (2)
+      /^(IE)(\d{7}[A-W][AH])$/, //** Ireland (3)
+      /^(IT)(\d{11})$/, //** Italy
+      /^(LV)(\d{11})$/, //** Latvia
+      /^(LT)(\d{9}|\d{12})$/, //** Lithunia
+      /^(LU)(\d{8})$/, //** Luxembourg
+      /^(MT)([1-9]\d{7})$/, //** Malta
+      /^(NL)(\d{9})B\d{2}$/, //** Netherlands
+      /^(NO)(\d{9})$/, //** Norway (not EU)
+      /^(PL)(\d{10})$/, //** Poland
+      /^(PT)(\d{9})$/, //** Portugal
+      /^(RO)([1-9]\d{1,9})$/, //** Romania
+      /^(RU)(\d{10}|\d{12})$/, //** Russia
+      /^(RS)(\d{9})$/, //** Serbia
+      /^(SI)([1-9]\d{7})$/, //** Slovenia
+      /^(SK)([1-9]\d[2346-9]\d{7})$/, //** Slovakia Republic
+      /^(SE)(\d{10}01)$/ //** Sweden
+    ];
+    // Load up the string to check
+    let VATNumber = toCheck.toUpperCase();
 
-  const countryVatCheckers = new CountryVATCheckers();
+    // Remove spaces etc. from the VAT number to help validation
+    VATNumber = VATNumber.replace(/(\s|-|\.)+/g, "");
 
-  return vatexp
-    .filter(regexp => regexp.test(VATNumber))
-    .map(regexp => {
-      regexp.test(VATNumber);
-      let cCode = RegExp.$1; // Isolate country code
-      const cNumber = RegExp.$2; // Isolate the number
-      if (cCode.length === 0) {
-        cCode = defCCode;
-      } // Set up default country code
-      // Call the appropriate country VAT validation routine depending on the country code
-      return countryVatCheckers[`${cCode}VATCheckDigit`](cNumber);
-    })
-    .reduce((memo, isValid) => isValid, false);
+    const countryVatCheckers = new CountryVATCheckers();
+
+    return vatexp
+      .filter(regexp => regexp.test(VATNumber))
+      .map(regexp => {
+        regexp.test(VATNumber);
+        let cCode = RegExp.$1; // Isolate country code
+        const cNumber = RegExp.$2; // Isolate the number
+        if (cCode.length === 0) {
+          cCode = defCCode;
+        } // Set up default country code
+        // Call the appropriate country VAT validation routine depending on the country code
+        return countryVatCheckers[`${cCode}VATCheckDigit`](cNumber);
+      })
+      .reduce((memo, isValid) => isValid, false);
+  }
 }
 
 class CountryVATCheckers {
@@ -106,7 +112,7 @@ class CountryVATCheckers {
     // Checks the check digits of a Belgium VAT number.
 
     // Nine digit numbers have a 0 inserted at the front.
-    if (vatnumber.length == 9) vatnumber = '0' + vatnumber;
+    if (vatnumber.length == 9) vatnumber = "0" + vatnumber;
 
     if (vatnumber.slice(1, 2) == 0) return false;
 
@@ -404,7 +410,7 @@ class CountryVATCheckers {
 
     //eight character numbers should be prefixed with an 0.
     if (vatnumber.length == 8) {
-      vatnumber = '0' + vatnumber;
+      vatnumber = "0" + vatnumber;
     }
 
     // Extract the next digit and multiply by the counter.
@@ -475,13 +481,13 @@ class CountryVATCheckers {
     // Personal number (NIF) (starting with numeric of Y or Z)
     else if (esexp[2].test(vatnumber)) {
       let tempnumber = vatnumber;
-      if (tempnumber.substring(0, 1) == 'Y')
-        tempnumber = tempnumber.replace(/Y/, '1');
-      if (tempnumber.substring(0, 1) == 'Z')
-        tempnumber = tempnumber.replace(/Z/, '2');
+      if (tempnumber.substring(0, 1) == "Y")
+        tempnumber = tempnumber.replace(/Y/, "1");
+      if (tempnumber.substring(0, 1) == "Z")
+        tempnumber = tempnumber.replace(/Z/, "2");
       return (
         tempnumber.charAt(8) ==
-        'TRWAGMYFPDXBNJZSQVHLCKE'.charAt(
+        "TRWAGMYFPDXBNJZSQVHLCKE".charAt(
           Number(tempnumber.substring(0, 8)) % 23
         )
       );
@@ -491,7 +497,7 @@ class CountryVATCheckers {
     else if (esexp[3].test(vatnumber)) {
       return (
         vatnumber.charAt(8) ==
-        'TRWAGMYFPDXBNJZSQVHLCKE'.charAt(Number(vatnumber.substring(1, 8)) % 23)
+        "TRWAGMYFPDXBNJZSQVHLCKE".charAt(Number(vatnumber.substring(1, 8)) % 23)
       );
     } else return false;
   }
@@ -545,13 +551,13 @@ class CountryVATCheckers {
     const multipliers = [8, 7, 6, 5, 4, 3, 2];
 
     // Government departments
-    if (vatnumber.substr(0, 2) == 'GD') {
+    if (vatnumber.substr(0, 2) == "GD") {
       if (vatnumber.substr(2, 3) < 500) return true;
       else return false;
     }
 
     // Health authorities
-    if (vatnumber.substr(0, 2) == 'HA') {
+    if (vatnumber.substr(0, 2) == "HA") {
       if (vatnumber.substr(2, 3) > 499) return true;
       else return false;
     }
@@ -646,7 +652,7 @@ class CountryVATCheckers {
     // If the code is type 1 format, we need to convert it to the new before performing the validation.
     if (/^\d[A-Z\*\+]/.test(vatnumber))
       vatnumber =
-        '0' +
+        "0" +
         vatnumber.substring(2, 7) +
         vatnumber.substring(0, 1) +
         vatnumber.substring(7, 8);
@@ -658,13 +664,13 @@ class CountryVATCheckers {
     // If the number is type 3 then we need to include the trailing A or H in the calculation
     if (/^\d{7}[A-Z][AH]$/.test(vatnumber)) {
       // Add in a multiplier for the character A (1*9=9) or H (8*9=72)
-      if (vatnumber.charAt(8) == 'H') total += 72;
+      if (vatnumber.charAt(8) == "H") total += 72;
       else total += 9;
     }
 
     // Establish check digit using modulus 23, and translate to char. equivalent.
     total = total % 23;
-    if (total == 0) total = 'W';
+    if (total == 0) total = "W";
     else total = String.fromCharCode(total + 64);
 
     // Compare it with the eighth character of the VAT number. If it's the same, then it's valid.
@@ -1050,5 +1056,3 @@ class CountryVATCheckers {
     else return false;
   }
 }
-
-export default checkVATNumber;
