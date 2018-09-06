@@ -970,3 +970,5 @@ class CountryVATCheckers {
     else return false;
   }
 }
+
+module.exports = CountryVATCheckers;

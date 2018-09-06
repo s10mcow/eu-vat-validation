@@ -1,4 +1,4 @@
-import CountryVATCheckers from "./CountryVATCheckers";
+const CountryVATCheckers = require("./CountryVATCheckers");
 
 class VatValidator {
   constructor(defaultVatCode = "DE") {
